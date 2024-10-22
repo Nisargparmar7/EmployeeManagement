@@ -1,0 +1,63 @@
+﻿@model EmployeeManagement.ViewModels.AllocateViewModel
+
+<div class="allocation-container">
+    <h3>Allocate Job to Employee</h3>
+
+    <form asp-action="Allocate" method="post">
+        <div class="form-group">
+            <label for="employeeSelect">Select Employee</label>
+            <select id="employeeSelect" name="selectedEmployeeId" class="form-select">
+                <option value="">Select Employee</option>
+                @foreach (var user in Model.users)
+                {
+                    <option value="@user.UserId">@user.UserName</option> <!-- Employee Name -->
+                }
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="jobSelect">Select Job Title</label>
+            <select id="jobSelect" name="selectedJobId" class="form-select">
+                <option value="">Select Job</option>
+                @foreach (var job in Model.jobs)
+                {
+                    <option value="@job.JobId">@job.JobTitle</option> <!-- Job Title -->
+                }
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Allocate</button>
+    </form>
+</div>
+
+<style>
+    .allocation-container {
+        margin: 20px;
+        padding: 20px;
+        background-color: #f9f9f9;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    .form-select {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ced4da;
+        border-radius: 5px;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+</style>

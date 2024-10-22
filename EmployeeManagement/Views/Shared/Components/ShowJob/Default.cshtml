@@ -1,0 +1,73 @@
+﻿@model EmployeeManagement.Models.JobModel
+
+<style>
+    body {
+        background-color: #f8f9fa;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        padding: 20px;
+    }
+
+    h3 {
+        text-align: center;
+        color: #343a40;
+        margin-bottom: 20px;
+        font-weight: bold;
+    }
+
+    .job-container {
+        border: 1px solid #007BFF;
+        border-radius: 8px;
+        padding: 20px;
+        margin: 15px auto;
+        background-color: #ffffff;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        transition: transform 0.2s, box-shadow 0.2s;
+        max-width: 600px;
+    }
+
+        .job-container:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+        }
+
+    .job-title {
+        color: #007BFF;
+        font-size: 1.8em;
+        margin: 0 0 10px 0;
+        font-weight: 600;
+    }
+
+    .job-description {
+        font-size: 1.1em;
+        color: #333;
+        margin-bottom: 10px;
+    }
+
+    .job-city {
+        font-style: italic;
+        color: #555;
+        font-size: 1em;
+    }
+
+    .no-job-message {
+        color: red;
+        font-weight: bold;
+        text-align: center;
+        font-size: 1.2em;
+        margin-top: 20px;
+    }
+</style>
+
+<h3>Your Job</h3>
+@if (Model != null)
+{
+    <div class="job-container">
+        <h4 class="job-title">@Model.JobTitle</h4>
+        <p class="job-description">@Model.Description</p>
+        <p class="job-city">City: @Model.City</p>
+    </div>
+}
+else
+{
+    <p class="no-job-message">No job found.</p>
+}

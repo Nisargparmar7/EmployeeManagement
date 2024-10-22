@@ -1,0 +1,101 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<style>
+    body {
+        background-color: #f8f9fa;
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 20px;
+        color: #343a40;
+    }
+
+    h1 {
+        text-align: center;
+        color: #007bff;
+        margin-bottom: 20px;
+        font-size: 2.5em;
+    }
+
+    h2 {
+        color: #495057;
+        margin-top: 20px;
+        font-size: 1.8em;
+    }
+
+    p {
+        font-size: 1.1em;
+        margin: 15px 0;
+        color: #6c757d;
+    }
+
+    .manager-section, .employee-section {
+        background-color: #ffffff;
+        padding: 20px;
+        margin: 20px auto;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        max-width: 800px;
+    }
+
+        .manager-section h2, .employee-section h2 {
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 10px;
+        }
+
+    a {
+        text-decoration: none;
+        color: #007bff;
+        font-weight: bold;
+        transition: color 0.3s;
+    }
+
+        a:hover {
+            color: #0056b3;
+        }
+
+    .welcome-message {
+        text-align: center;
+        margin: 20px 0;
+        font-size: 1.2em;
+        color: #28a745;
+    }
+</style>
+
+<h1>Welcome to Employee Management System</h1>
+
+@if (!string.IsNullOrEmpty(ViewBag.Role))
+{
+    if (ViewBag.Role.Equals("Employee", StringComparison.OrdinalIgnoreCase))
+    {
+        <div class="employee-section">
+            <h2>Welcome, Staff!</h2>
+            <div class="welcome-message">
+                @await Component.InvokeAsync("ShowJob") <!-- ShowJob component for Employee -->
+            </div>
+        </div>
+    }
+    else if (ViewBag.Role.Equals("Manager", StringComparison.OrdinalIgnoreCase))
+    {
+        <div class="manager-section">
+            <h2>Welcome, Manager!</h2>
+            <p>As a manager, you can oversee job allocations.</p>
+            <div>
+                @await Component.InvokeAsync("ListJob") <!-- Invoke ListJob for Manager -->
+            </div>
+            <div>
+                @await Component.InvokeAsync("AddJob") <!-- Invoke AddJobViewComponent -->
+            </div>
+
+
+            <div>
+                <a asp-action="ShowEmployee" asp-controller="Employee">-Allocate Job to Employee</a>
+            </div>
+        </div>
+    }
+}
+else
+{
+    <h2>Please log in to view your job details.</h2>
+}
